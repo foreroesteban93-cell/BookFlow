@@ -2,35 +2,38 @@
 package com.example.bookflow.screens
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.bookflow.model.Reservation
+import com.example.bookflow.sections.ReservationInfoSection
 
 @Composable
 fun ReservationDetailScreen(
     reservation: Reservation,
-    onBack: () -> Unit,
     onRenew: () -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
+    onBack: () -> Unit
 ) {
-    Page("Detalle de reserva") {
-        Text("Libro: ${reservation.bookTitle}")
-        Text("Autor: ${reservation.author}")
-        Text("Código: ${reservation.id}")
-        Text("Fecha: ${reservation.reservationDate}")
-        Text("Estado: ${reservation.status}")
+    Page("Detalle de la reserva") {
+        ReservationInfoSection(reservation = reservation)
 
-        if (reservation.status == "Activa") {
-            PrimaryButton("Renovar reserva", onRenew)
+        Button(
+            onClick = onRenew,
+            modifier = Modifier.fillMaxWidth(),
+            enabled = reservation.status == "Activa"
+        ) {
+            Text("Renovar reserva")
+        }
 
-            OutlinedButton(
-                onClick = onCancel,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Cancelar reserva")
-            }
+        OutlinedButton(
+            onClick = onCancel,
+            modifier = Modifier.fillMaxWidth(),
+            enabled = reservation.status == "Activa"
+        ) {
+            Text("Cancelar reserva")
         }
 
         OutlinedButton(
