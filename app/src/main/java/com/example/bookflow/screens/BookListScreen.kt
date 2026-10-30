@@ -1,11 +1,10 @@
 
 package com.example.bookflow.screens
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import com.example.bookflow.composables.Page
+import com.example.bookflow.composables.SecondaryButton
 import com.example.bookflow.data.BookRepository
 import com.example.bookflow.model.Book
 import com.example.bookflow.sections.BookCard
@@ -27,11 +26,9 @@ fun BookListScreen(
             )
         }
 
-        OutlinedButton(
-            onClick = onBack,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Volver")
-        }
+        SecondaryButton(
+            text = "Volver",
+            onClick = onBack
+        )
     }
 }
